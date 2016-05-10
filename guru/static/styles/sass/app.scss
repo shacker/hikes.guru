@@ -1,0 +1,5 @@
+// Override icon-font-path value and include Bootstrap scss
+$icon-font-path: "/static/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+@import "partials/pages";

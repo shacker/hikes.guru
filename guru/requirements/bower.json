@@ -1,0 +1,23 @@
+{
+  "name": "project",
+  "version": "1.0",
+  "homepage": "http://hikes.guru",
+  "authors": [
+    "Scot Hacker <shacker@birdhouse.org>"
+  ],
+  "description": "JS and CSS assets for hikes.guru",
+  "license": "Private",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../static/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "3.3.6",
+    "ckeditor": "4.5.4"
+  }
+}
