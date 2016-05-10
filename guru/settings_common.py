@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'people',
     'hikes',
 ]
 
@@ -76,7 +77,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# AUTH_USER_MODEL = 'people.UserProfile'
+AUTH_USER_MODEL = 'people.UserProfile'
+
 # Because we are proxying through nginx, trust the forwarded hostname
 USE_X_FORWARDED_HOST = True
 
