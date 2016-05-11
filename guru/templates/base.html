@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -72,6 +71,20 @@
 
     <!-- Page Content -->
     <div class="container">
+
+        {% if messages %}
+            <div class="container-fluid">
+            {% for message in messages %}
+                <div id="top-alert" {% if message.tags %} class="alert alert-dismissible alert-{{ message.tags }}"{% endif %}>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+             </div>
+        {% endif %}
+
         {% block content %}
         {% endblock content %}
     </div>
