@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
 ]
 
 INSTALLED_APPS = [
+    # Django built-ins
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd party
+    'django_extensions',
+
+    # Our apps
     'people',
     'hikes',
 ]
