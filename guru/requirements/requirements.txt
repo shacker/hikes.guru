@@ -1,12 +1,7 @@
-# If compilation errors with libsass, first do:
-# export CFLAGS=-Qunused-arguments
-# export CPPFLAGS=-Qunused-arguments
-
-django
+django==1.9.6
 psycopg2
 django-extensions==1.6.6
 Pillow==3.2.0
 sorl-thumbnail==12.3
-libsass
 python-social-auth==0.2.19
 bleach==1.4.2
