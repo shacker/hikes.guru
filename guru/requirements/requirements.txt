@@ -1,3 +1,7 @@
+# If compilation errors with libsass, first do:
+# export CFLAGS=-Qunused-arguments
+# export CPPFLAGS=-Qunused-arguments
+
 django
 psycopg2
 django-extensions==1.6.6
