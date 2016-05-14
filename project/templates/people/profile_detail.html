@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Hikes owned by {{ person }}</h2>
+
+
+    <p>Photo here</p>
+
+    {% if person.twitter %}
+        <p>Twitter: <a href="https://twitter.com/{{ person.twitter }}">{{ person.twitter }}</a></p>
+    {% endif %}
+
+    {% if person.facebook %}
+        <p>Facebook: <a href="https://facebook.com/{{ person.facebook }}">{{ person.facebook }}</a></p>
+    {% endif %}
+
+    {% if person.instagram %}
+        <p>Instagram: <a href="https://instagram.com/{{ person.instagram }}">{{ person.instagram }}</a></p>
+    {% endif %}
+
+
+{% endblock content %}

@@ -12,6 +12,7 @@ urlpatterns = [
     url('', include('social.apps.django_app.urls', namespace='social')),  # social_auth
     url(r'^logout/$', logout, {'next_page': '/'}, name="logout"),
     url(r'^feedback/$', feedback, name='feedback'),
+    url(r'^people/', include('people.urls')),
 
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name="home"),
