@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Our apps
     'people',
     'hikes',
+    'feedback',
 ]
 
 MIDDLEWARE_CLASSES = [

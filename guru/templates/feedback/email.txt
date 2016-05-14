@@ -1,0 +1,9 @@
+Feedback from {{ user.get_full_name }} ({{ user.username }})
+
+Feedback type: {{ feedback_type }}
+
+{% autoescape off %}
+{{ body }}
+{% endautoescape %}
+
+{% now "jS F Y H:i" %}

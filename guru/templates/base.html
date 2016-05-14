@@ -103,7 +103,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <p>Copyright &copy; Birdhouse Arts, {% now "Y" %}</p>
-                    <p><a href="">Contact Us</a></p>
+
+                    {% if user.is_authenticated %}
+                        <p><a href="{% url 'feedback' %}">Suggestions? Leave us feedback!</a></p>
+                    {% else %}
+                        <p>Want to leave us feedback? Please <a href="">log in</a>.</p>
+                    {% endif %}
+
                 </div>
             </div>
         </footer>
