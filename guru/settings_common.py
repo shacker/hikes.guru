@@ -86,6 +86,8 @@ TEMPLATES = [
 ]
 
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_URL = '/login/twitter'
 
 WSGI_APPLICATION = 'guru.wsgi.application'
 
