@@ -29,6 +29,6 @@ brew install sassc
 
 Customizations go in `static/styles/sass/app.scss` and in the `partials` folder within. To compile:
 
-`sassc guru/static/styles/sass/app.scss guru/static/styles/css/app.css`
+`sassc project/static/styles/sass/app.scss project/static/styles/css/app.css`
 
 Add -w in another terminal to "watch" the directory (real-time recompilation).

@@ -1,19 +1,15 @@
-import os
+import os, sys
 
 DEBUG = False
 
-ADMINS = [
-    ('Scot Hacker', 'shacker@birdhouse.org'),
-]
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'guru/static'), ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'project/static'), ]
 
 # os.path.dirname refs the parent dir
-LOGGING_DIR = os.path.join(BASE_DIR, 'guru/logs')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'guru/uploads')
-STATIC_ROOT = os.path.join(BASE_DIR, 'guru/static_deploy')  # collectstatic will gather static files here.
+LOGGING_DIR = os.path.join(BASE_DIR, 'project/logs')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'project/uploads')
+STATIC_ROOT = os.path.join(BASE_DIR, 'project/static_deploy')  # collectstatic will gather static files here.
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
 
@@ -27,6 +23,9 @@ ALLOWED_HOSTS = [
     '.hikes.guru',  # Allow domain and subdomains
     '127.0.0.1',
 ]
+
+# Add our custom 'apps' dir to the path
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 INSTALLED_APPS = [
     # Django built-ins
@@ -65,12 +64,12 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-ROOT_URLCONF = 'guru.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['guru/templates', ],
+        'DIRS': ['project/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +88,7 @@ SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_URL = '/login/twitter'
 
-WSGI_APPLICATION = 'guru.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -101,8 +100,6 @@ AUTH_USER_MODEL = 'people.UserProfile'
 
 # Because we are proxying through nginx, trust the forwarded hostname
 USE_X_FORWARDED_HOST = True
-
-WSGI_APPLICATION = 'guru.wsgi.application'
 
 # Override CSS class for the ERROR tag level to match Bootstrap class name
 from django.contrib.messages import constants as message_constants
