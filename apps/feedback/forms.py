@@ -7,11 +7,14 @@ class FeedbackForm(forms.ModelForm):
     Simple user feedback form.
     '''
 
-    feedback_type = forms.ChoiceField(choices=FEEDBACK_TYPE_CHOICES, required=False,
+    feedback_type = forms.ChoiceField(
+        choices=FEEDBACK_TYPE_CHOICES, required=False,
         widget=forms.Select(attrs={'class': 'form-control'}))
-    subject = forms.CharField(required=True,
+    subject = forms.CharField(
+        required=True,
         widget=forms.TextInput(attrs={'class': 'form-control'}))
-    body = forms.CharField(required=True,
+    body = forms.CharField(
+        required=True,
         widget=forms.Textarea(attrs={'class': 'form-control'}))
 
     class Meta:

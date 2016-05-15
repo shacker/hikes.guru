@@ -85,6 +85,12 @@ TEMPLATES = [
     },
 ]
 
+# HTML tags users are allowed to use in forms - all others are bleached out
+ALLOWED_TAGS = [
+    'a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i',
+    'li', 'ol', 'strong', 'ul', 'p', 'h1', 'h2', 'h3', 'h4', 'hr'
+    ]
+
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_URL = '/login/twitter'
