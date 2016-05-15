@@ -25,6 +25,7 @@
 </head>
 
 <body>
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -96,22 +97,19 @@
         {% endblock content %}
     </div>
 
-    <div class="container">
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Birdhouse Arts, {% now "Y" %}</p>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                Copyright &copy; Birdhouse Arts, {% now "Y" %}
 
-                    {% if user.is_authenticated %}
-                        <p><a href="{% url 'feedback' %}">Suggestions? Leave us feedback!</a></p>
-                    {% else %}
-                        <p>Want to leave us feedback? Please <a href="">log in</a>.</p>
-                    {% endif %}
-
-                </div>
-            </div>
-        </footer>
-    </div>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'feedback' %}">Suggestions? Leave us feedback!</a>
+                {% else %}
+                    Want to leave us feedback? Please <a href="">log in</a>.
+                {% endif %}
+            </p>
+        </div>
+    </footer>
 
     <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.min.js' %}"></script>
