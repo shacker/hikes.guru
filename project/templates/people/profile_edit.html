@@ -2,19 +2,20 @@
 {% load static %}
 
 {% block content %}
-
     <h3>Edit my Profile</h3>
+
+    {% include "people/avatar.html" %}<br />
+    <p><a href="{% url 'avatar_edit' %}" class="btn btn-primary">Change profile pic</a></p>
+
     <form class="" action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" class="btn btn-primary" name="profile_edit_form" value="Submit">
+        <p><input type="submit" class="btn btn-primary" name="profile_edit_form" value="Submit"></p>
     </form>
-
 {% endblock content %}
 
 {% block extra_js %}
     <script src="{% static 'bower_components/ckeditor/ckeditor.js' %}"></script>
-
     <script>
         $( document ).ready(function() {
             // Activate CKEditor on About field

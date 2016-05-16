@@ -56,3 +56,14 @@ def profile_edit(request):
         form = ProfileEditForm(instance=profile)
 
     return render(request, 'people/profile_edit.html', locals(), )
+
+
+@login_required
+def avatar_edit(request):
+    """
+    Replace/crop your avatar
+    """
+
+    person = get_object_or_404(UserProfile, username=request.user.username)
+
+    return render(request, 'people/avatar_edit.html', locals())

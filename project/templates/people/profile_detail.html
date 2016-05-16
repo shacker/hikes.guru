@@ -11,7 +11,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-2">
-                    <p><img src="{% static 'img/avatar-generic.png' %}" width="150" alt="Profile image"/></p>
+                    {% include "people/avatar.html" %}
 
                     {% if person == user %}
                         <p><a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit my profile</a></p>
