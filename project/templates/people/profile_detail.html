@@ -42,15 +42,17 @@
 
     <div class="row">
         <div class="col-sm-12">
-            {% for trail in person.trail_set.all  %}
-                <p>
-                    {{ trail.title }} ({{ trail.region }})<br />
-                    Distance: {{ trail.distance }}<br />
-                    Ascent: {{ trail.ascent }}<br />
-                    Calories: {{ trail.calories }}<br />
-                </p>
-
-            {% endfor %}
+            <div class="list-group">
+                {% for trail in person.trail_set.all  %}
+                    <span class="list-group-item">
+                        <h4 class="list-group-item-heading"><a href="">{{ trail.title }} ({{ trail.region }})</a></h4>
+                        <p class="list-group-item-text">Distance: {{ trail.distance }}</p>
+                        <p class="list-group-item-text">Ascent: {{ trail.ascent }}</p>
+                        <p class="list-group-item-text">Calories: {{ trail.calories }}</p>
+                        <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
+                    </span>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
