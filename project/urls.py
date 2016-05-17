@@ -6,7 +6,7 @@ from django.contrib.auth.views import logout
 from django.views.generic.base import RedirectView
 
 
-from hikes.views import home
+from base.views import home
 from feedback.views import feedback
 
 

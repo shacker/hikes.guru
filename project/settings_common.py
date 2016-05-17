@@ -9,7 +9,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'project/static'), ]
 
 # os.path.dirname refs the parent dir
 LOGGING_DIR = os.path.join(BASE_DIR, 'project/logs')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'project/uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 STATIC_ROOT = os.path.join(BASE_DIR, 'project/static_deploy')  # collectstatic will gather static files here.
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
 
     # Our apps
+    'base',
     'people',
-    'hikes',
+    'trails',
     'feedback',
 ]
 

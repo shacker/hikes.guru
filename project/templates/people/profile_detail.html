@@ -37,11 +37,22 @@
                     {% endif %}
                 </div>
             </div>
-
-      </div>
+        </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            {% for trail in person.trail_set.all  %}
+                <p>
+                    {{ trail.title }} ({{ trail.region }})<br />
+                    Distance: {{ trail.distance }}<br />
+                    Ascent: {{ trail.ascent }}<br />
+                    Calories: {{ trail.calories }}<br />
+                </p>
 
+            {% endfor %}
+        </div>
+    </div>
 
 
 
