@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify
+
 from sorl.thumbnail import ImageField
 
 
@@ -10,9 +12,6 @@ def get_avatar_path(instance, filename):
     Must be defined before the Profile class.
     """
 
-    # To keep filenames clean, take the first part of the filename and run it
-    # through django's slugify function (if you run the whole thing through,
-    # you lose the "." separator in the filename.)
     parts = str(filename).split(".")
     return 'avatars/' + instance.username + '/' + slugify(parts[0]) + '.' + parts[1]
 
@@ -21,6 +20,9 @@ def validate_username(username):
     if " " in username:
         msg = 'Usernames cannot contain spaces'
         raise ValidationError(msg)
+
+
+DISTANCE_CHOICES = [('km', 'kilometers'), ('mi', 'miles'), ]
 
 
 class UserProfile(AbstractUser):
@@ -40,6 +42,7 @@ class UserProfile(AbstractUser):
         max_length=60, help_text='Your Instagram username',
         null=True, blank=True, validators=[validate_username, ])
     photo = ImageField(upload_to=get_avatar_path, blank=True, null=True, max_length=255)
+    distance_pref = models.CharField(max_length=2, choices=(DISTANCE_CHOICES), default="mi")
 
     @property
     def full_name(self):

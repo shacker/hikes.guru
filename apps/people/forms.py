@@ -1,5 +1,5 @@
 from django import forms
-from people.models import UserProfile
+from people.models import UserProfile, DISTANCE_CHOICES
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -13,6 +13,10 @@ class ProfileEditForm(forms.ModelForm):
     last_name = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'form-control'}))
+    distance_pref = forms.ChoiceField(
+        required=False,
+        choices=DISTANCE_CHOICES,
+        label="Display distances as")
     twitter = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -28,4 +32,4 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['first_name', 'last_name', 'twitter', 'facebook', 'instagram', 'about']
+        fields = ['first_name', 'last_name', 'distance_pref', 'twitter', 'facebook', 'instagram', 'about']
