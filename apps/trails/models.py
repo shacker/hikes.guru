@@ -12,6 +12,13 @@ def get_gpx_path(instance, filename):
     return 'trackfiles/' + instance.owner.username + '/' + slugify(parts[0]) + '.' + parts[1]
 
 
+TRAIL_TYPE_CHOICES = [
+    ('loop', 'Loop'),
+    ('tb', 'There and Back'),
+    ('ow', 'One Way'),
+]
+
+
 class Trail(models.Model):
     '''
     Base trips and trails model.
@@ -30,6 +37,7 @@ class Trail(models.Model):
     duration = models.DurationField(blank=True, null=True)
     geocaches = models.BooleanField(default=False, help_text="Geocaches available on this trail")
     public = models.BooleanField(default=True, help_text="Visible to the world")
+    trail_type = models.CharField(max_length=6, choices=(TRAIL_TYPE_CHOICES), default="loop")
 
     def __str__(self):
         return '{o} - {t}'.format(o=self.owner, t=self.title)

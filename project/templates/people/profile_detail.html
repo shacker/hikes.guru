@@ -54,6 +54,7 @@
                             <p class="list-group-item-text">Calories: {{ trail.calories }}</p>
                         {% endif %}
                         <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
+                        <p class="list-group-item-text">Type: {{ trail.get_trail_type_display }}</p>
                         {% if person == user or user.is_superuser %}
                             <p class="list-group-item-text">Public: {{ trail.public }}</p>
                         {% endif %}
