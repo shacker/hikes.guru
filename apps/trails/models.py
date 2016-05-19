@@ -29,6 +29,7 @@ class Trail(models.Model):
     calories = models.SmallIntegerField(blank=True, null=True)
     duration = models.DurationField(blank=True, null=True)
     geocaches = models.BooleanField(default=False, help_text="Geocaches available on this trail")
+    public = models.BooleanField(default=True, help_text="Visible to the world")
 
     def __str__(self):
         return '{o} - {t}'.format(o=self.owner, t=self.title)

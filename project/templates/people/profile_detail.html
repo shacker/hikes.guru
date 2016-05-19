@@ -3,7 +3,7 @@
 {% load trailtags %}
 
 {% block content %}
-    <h2>Hikes owned by {{ person }}</h2>
+    <h2>{{ person }}</h2>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="list-group">
-                {% for trail in person.trail_set.all  %}
+                {% for trail in trails  %}
                     <span class="list-group-item">
                         <h4 class="list-group-item-heading"><a href="">{{ trail.title }} ({{ trail.region }})</a></h4>
                         <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
@@ -53,6 +53,9 @@
                             <p class="list-group-item-text">Calories: {{ trail.calories }}</p>
                         {% endif %}
                         <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
+                        {% if person == user or user.is_superuser %}
+                            <p class="list-group-item-text">Public: {{ trail.public }}</p>
+                        {% endif %}
                     </span>
                 {% endfor %}
             </div>

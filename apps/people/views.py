@@ -11,7 +11,6 @@ from people.models import UserProfile
 
 
 def directory(request):
-
     """
     Browse / search / filter people.
     """
@@ -26,6 +25,12 @@ def profile_detail(request, username):
     """
 
     person = get_object_or_404(UserProfile, username=username)
+
+    trails = person.trail_set.all()
+
+    # Hide private trails from non-superusers
+    if not person == request.user and not request.user.is_superuser:
+        trails = trails.exclude(public=True)
 
     return render(request, 'people/profile_detail.html', locals())
 
