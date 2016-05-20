@@ -2,12 +2,18 @@
 
 <span class="list-group-item">
     <h4 class="list-group-item-heading"><a href="">{{ trail.title }} ({{ trail.region }})</a></h4>
-    <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
-    <p class="list-group-item-text">Ascent: {% meters_to_distance trail.ascent user.distance_pref "short" %}</p>
+    {% if trail.distance %}
+        <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
+    {% endif %}
+    {% if trail.ascent %}
+        <p class="list-group-item-text">Ascent: {% meters_to_distance trail.ascent user.distance_pref "short" %}</p>
+    {% endif %}
     {% if trail.calories %}
         <p class="list-group-item-text">Calories: {{ trail.calories }}</p>
     {% endif %}
-    <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
+    {% if trail.duration %}
+        <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
+    {% endif %}
     <p class="list-group-item-text">Type: {{ trail.get_trail_type_display }}</p>
     {% if person == user or user.is_superuser %}
         <p class="list-group-item-text">Public: {{ trail.public }}</p>

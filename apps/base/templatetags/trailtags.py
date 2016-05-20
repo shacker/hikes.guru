@@ -13,16 +13,19 @@ def meters_to_distance(meters, pref, format="long"):
     If format == "short", returns in feet or meters.
     '''
 
-    dist = meters_to_dist(meters, pref, format)
-    rounded_dist = round(dist, 2)
-    if format == "long" and pref == "mi":
-        units = "miles"
-    elif format == "short" and pref == "mi":
-        units = "feet"
-    elif format == "long" and pref == "km":
-        units = "km"
-    else:
-        # format = "short" and pref = "km"
-        units = "meters"
+    if meters:
+        dist = meters_to_dist(meters, pref, format)
+        rounded_dist = round(dist, 2)
+        if format == "long" and pref == "mi":
+            units = "miles"
+        elif format == "short" and pref == "mi":
+            units = "feet"
+        elif format == "long" and pref == "km":
+            units = "km"
+        else:
+            # format = "short" and pref = "km"
+            units = "meters"
 
-    return "{d} {u}".format(d=rounded_dist, u=units)
+        return "{d} {u}".format(d=rounded_dist, u=units)
+    else:
+        return None
