@@ -1,3 +1,6 @@
+import string
+import random
+
 
 def meters_to_dist(meters, pref, format="long"):
     '''
@@ -19,3 +22,10 @@ def meters_to_dist(meters, pref, format="long"):
             return meters / 1609.344  # miles
     else:
         return None
+
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    '''
+    Generate random 6-char IDs for use in URLs.
+    '''
+    return ''.join(random.choice(chars) for _ in range(size))
