@@ -37,6 +37,7 @@ class Trail(models.Model):
     duration = models.DurationField(blank=True, null=True)
     geocaches = models.BooleanField(default=False, help_text="Geocaches available on this trail")
     public = models.BooleanField(default=True, help_text="Visible to the world")
+    featured = models.BooleanField(default=False, help_text="Editor picks")
     trail_type = models.CharField(max_length=6, choices=(TRAIL_TYPE_CHOICES), default="loop")
 
     def __str__(self):
