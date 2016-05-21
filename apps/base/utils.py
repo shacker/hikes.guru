@@ -10,7 +10,6 @@ def meters_to_dist(meters, pref, format="long"):
     '''
 
     if meters:
-        print("have meters")
         if pref == "km" and format == "short":
             return meters  # meters
         elif pref == "km" and format == "long":

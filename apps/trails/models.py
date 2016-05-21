@@ -40,16 +40,15 @@ class Trail(models.Model):
     public = models.BooleanField(default=True, help_text="Visible to the world")
     featured = models.BooleanField(default=False, help_text="Editor picks")
     trail_type = models.CharField(max_length=6, choices=(TRAIL_TYPE_CHOICES), default="loop")
-    urlhash = models.CharField(max_length=6)
+    urlhash = models.CharField(max_length=6, null=True, blank=True, unique=True)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         # Make sure all trails get a urlhash, regardless how they're saved.
         if not self.urlhash:
-            urlhash = id_generator()
-            while not Trail.objects.filter(urlhash=urlhash).exists():
-                super(Trail, self).save()  # Initial actual save. Now it will have an ID
-                self.urlhash = urlhash
-                self.save()
+            self.urlhash = id_generator()
+            while Trail.objects.filter(urlhash=self.urlhash).exists():
+                self.urlhash = id_generator()
+        super(Trail, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{o} - {t}'.format(o=self.owner, t=self.title)

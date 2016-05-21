@@ -22,7 +22,10 @@ def validate_username(username):
         raise ValidationError(msg)
 
 
-DISTANCE_CHOICES = [('km', 'kilometers'), ('mi', 'miles'), ]
+DISTANCE_CHOICES = [
+        ('km', 'kilometers'),
+        ('mi', 'miles'),
+    ]
 
 
 class UserProfile(AbstractUser):
