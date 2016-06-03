@@ -25,6 +25,7 @@ class Trail(models.Model):
     Base trips and trails model.
     '''
 
+    urlhash = models.CharField(max_length=6, null=True, blank=True, unique=True)
     owner = models.ForeignKey(UserProfile)
     title = models.CharField(max_length=120)
     region = models.CharField(max_length=120, help_text="e.g. Yosemite, CA")
@@ -40,7 +41,6 @@ class Trail(models.Model):
     public = models.BooleanField(default=True, help_text="Visible to the world")
     featured = models.BooleanField(default=False, help_text="Editor picks")
     trail_type = models.CharField(max_length=6, choices=(TRAIL_TYPE_CHOICES), default="loop")
-    urlhash = models.CharField(max_length=6, null=True, blank=True, unique=True)
 
     def save(self, *args, **kwargs):
         # Make sure all trails get a urlhash, regardless how they're saved.

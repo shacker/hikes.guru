@@ -1,7 +1,7 @@
 {% load trailtags %}
 
 <span class="list-group-item">
-    <h4 class="list-group-item-heading"><a href="">{{ trail.title }} ({{ trail.region }})</a></h4>
+    <h4 class="list-group-item-heading"><a href="{% url 'trail_detail' trail.urlhash %}">{{ trail.title }} ({{ trail.region }})</a></h4>
     {% if trail.distance %}
         <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
     {% endif %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ trail.title }}</h2>
+
+    {{ trail.owner }}
+
+    {% include "trails/trail_list_looper.html" %}
+
+{% endblock content %}
