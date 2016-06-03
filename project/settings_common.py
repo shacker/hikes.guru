@@ -1,5 +1,6 @@
 import os
 import sys
+from django.contrib.messages import constants as message_constants
 
 DEBUG = False
 
@@ -10,9 +11,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'project/static'), ]
 # os.path.dirname refs the parent dir
 LOGGING_DIR = os.path.join(BASE_DIR, 'project/logs')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'project/static_deploy')  # collectstatic will gather static files here.
 STATIC_URL = '/static/'
-MEDIA_URL = '/uploads/'
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -110,7 +111,6 @@ AUTH_USER_MODEL = 'people.UserProfile'
 USE_X_FORWARDED_HOST = True
 
 # Override CSS class for the ERROR tag level to match Bootstrap class name
-from django.contrib.messages import constants as message_constants
 MESSAGE_TAGS = {message_constants.ERROR: 'danger'}
 
 # HTML tags users are allowed to use in forms - all others are bleached out
