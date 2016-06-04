@@ -9,18 +9,49 @@
     {% if trail.distance %}
         <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
     {% endif %}
+
     {% if trail.ascent %}
         <p class="list-group-item-text">Ascent: {% meters_to_distance trail.ascent user.distance_pref "short" %}</p>
     {% endif %}
+
     {% if trail.calories %}
         <p class="list-group-item-text">Calories: {{ trail.calories }}</p>
     {% endif %}
+
     {% if trail.duration %}
         <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
     {% endif %}
+
     <p class="list-group-item-text">Type: {{ trail.get_trail_type_display }}</p>
+
     {% if person == user or user.is_superuser %}
         <p class="list-group-item-text">Public: {{ trail.public }}</p>
     {% endif %}
 
+    {% if user.is_superuser %}
+        <p class="topmargin">
+            <a href="javascript:void(0);" id="toggle_featured" class="btn btn-success btn-sm">
+                {% if trail.featured %}Unfeature{% else %}Feature{% endif %}</a>
+        </p>
+    {% endif %}
 {% endblock content %}
+
+{% block extra_js %}
+    <script>
+        // Toggle Featured button text
+        $('#toggle_featured').click(function(){
+            $.ajax({
+                url: "{% url 'toggle_featured' %}",
+                type: "POST",
+                data: JSON.stringify({ "urlhash": "{{ trail.urlhash }}" }),
+                success: function() {
+                    if ($('#toggle_featured').text().trim() == 'Feature') {
+                        $('#toggle_featured').text('Unfeature');
+                    } else {
+                        $('#toggle_featured').text('Feature');
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock extra_js %}

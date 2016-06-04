@@ -1,4 +1,9 @@
+import json
+
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse
 
 from trails.models import Trail
 
@@ -30,3 +35,24 @@ def trail_detail(request, urlhash):
 
     trail = get_object_or_404(Trail, urlhash=urlhash)
     return render(request, 'trails/trail_detail.html', locals())
+
+
+@user_passes_test(lambda u: u.is_superuser)
+@csrf_exempt
+def toggle_featured(request):
+    '''
+    Superuser can toggle a trail's "featured" status via ajax.
+    '''
+
+    if request.method == 'POST':
+        received_json_data = json.loads(request.body.decode('utf-8'))
+        urlhash = received_json_data.get('urlhash', None)
+        trail = Trail.objects.get(urlhash=urlhash)
+        if trail.featured:
+            trail.featured = False
+        else:
+            trail.featured = True
+        trail.save()
+
+        # All views must return an httpresponse
+        return HttpResponse(status=204)
