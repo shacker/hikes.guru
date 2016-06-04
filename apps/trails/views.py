@@ -3,6 +3,16 @@ from django.shortcuts import get_object_or_404, render
 from trails.models import Trail
 
 
+def trails_list(request):
+    """
+    Main trails directory /finder
+    """
+
+    trails = Trail.objects.all().order_by('-updated')
+
+    return render(request, 'trails/list.html', locals())
+
+
 def featured(request):
     """
     Trails featured by editors

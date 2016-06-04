@@ -41,10 +41,6 @@
         </div>
     </div>
 
-    {% if user.is_superuser %}
-        <a href="{% url 'login_as_other' person.username %}" class="btn btn-warning btn-small">Become {{ person }}</a>
-    {% endif %}
-
     <div class="row">
         <div class="col-sm-12">
             <div class="list-group">
@@ -54,5 +50,9 @@
             </div>
         </div>
     </div>
+
+    {% if user.is_superuser %}
+        <a href="{% url 'login_as_other' person.username %}" class="btn btn-warning btn-small">Become {{ person }}</a>
+    {% endif %}
 
 {% endblock content %}
