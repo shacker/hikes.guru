@@ -36,11 +36,14 @@
                     {% if person.instagram %}
                         <a href="https://instagram.com/{{ person.instagram }}"><img src="{% static 'img/social/instagram-128.png' %}" width="30"/></a>
                     {% endif %}
-
                 </div>
             </div>
         </div>
     </div>
+
+    {% if user.is_superuser %}
+        <a href="{% url 'login_as_other' person.username %}" class="btn btn-warning btn-small">Become {{ person }}</a>
+    {% endif %}
 
     <div class="row">
         <div class="col-sm-12">

@@ -5,10 +5,9 @@ from django.contrib import admin
 from django.contrib.auth.views import logout
 from django.views.generic.base import RedirectView
 
-
+from base.views import login_as_other
 from base.views import home
 from feedback.views import feedback
-
 
 urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)),
@@ -18,7 +17,7 @@ urlpatterns = [
     url(r'^feedback/$', feedback, name='feedback'),
     url(r'^people/', include('people.urls')),
     url(r'^trails/', include('trails.urls')),
-
+    url(r'^login_as_other/(?P<username>[\w.-]+)$', login_as_other, name='login_as_other'),
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name="home"),
 
