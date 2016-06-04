@@ -1,10 +1,26 @@
 {% extends "base.html" %}
+{% load trailtags %}
 
 {% block content %}
     <h2>{{ trail.title }}</h2>
 
-    {{ trail.owner }}
+    <p>Trail created by <a href="{% url 'profile_detail' trail.owner %}">{{ trail.owner }}</a></p>
 
-    {% include "trails/trail_list_looper.html" %}
+    {% if trail.distance %}
+        <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
+    {% endif %}
+    {% if trail.ascent %}
+        <p class="list-group-item-text">Ascent: {% meters_to_distance trail.ascent user.distance_pref "short" %}</p>
+    {% endif %}
+    {% if trail.calories %}
+        <p class="list-group-item-text">Calories: {{ trail.calories }}</p>
+    {% endif %}
+    {% if trail.duration %}
+        <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
+    {% endif %}
+    <p class="list-group-item-text">Type: {{ trail.get_trail_type_display }}</p>
+    {% if person == user or user.is_superuser %}
+        <p class="list-group-item-text">Public: {{ trail.public }}</p>
+    {% endif %}
 
 {% endblock content %}
