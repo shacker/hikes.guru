@@ -4,7 +4,7 @@
 {% block content %}
     <h2>{{ trail.title }}</h2>
 
-    <p>Trail created by <a href="{% url 'profile_detail' trail.owner %}">{{ trail.owner }}</a></p>
+    <p>Trail created by <a href="{% url 'profile_detail' trail.owner.username %}">{{ trail.owner }}</a></p>
 
     {% if trail.distance %}
         <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
