@@ -2,6 +2,8 @@
 {% load static %}
 {% load trailtags %}
 
+{% block title %}{{ person }} {{ block.super }}{% endblock title %}
+
 {% block content %}
     <h2>{{ person }}</h2>
 

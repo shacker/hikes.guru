@@ -9,7 +9,9 @@
     <meta name="description" content="Find recommended hikes near you. Upload, annotate, and publish the world's best hikes.">
     <meta name="author" content="Birdhouse Arts, {% now "Y" %}">
 
-    <title>hikes.guru</title>
+    <title>
+        {% block title %}- hikes.guru{% endblock title %}
+    </title>
 
     <link rel="icon" type="image/png" href="{% static '/static/img/compass2x.png' %}" />
     <link href="{% static 'styles/css/app.css' %}" rel="stylesheet">
