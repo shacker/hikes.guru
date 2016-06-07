@@ -52,3 +52,15 @@ class Trail(models.Model):
 
     def __str__(self):
         return '{o} - {t}'.format(o=self.owner, t=self.title)
+
+
+class Bookmark(models.Model):
+    '''
+    User saves trail for later.
+    '''
+
+    user = models.ForeignKey(UserProfile)
+    trail = models.ForeignKey(Trail)
+
+    def __str__(self):
+        return '{u} - {t}'.format(u=self.user, t=self.trail)
