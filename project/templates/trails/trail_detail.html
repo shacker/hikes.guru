@@ -30,9 +30,11 @@
         <p class="list-group-item-text">Public: {{ trail.public }}</p>
     {% endif %}
 
-    {# Bookmark icon toggled on the fly with JS #}
-    <a id="bookmark_add" class="toggle_bookmark hidden" href="#"><span class="glyphicon glyphicon-bookmark"></span> Bookmark</a>
-    <a id="bookmark_remove" class="toggle_bookmark hidden"  href="#"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+    {# Ajax bookmark icon toggle. User can't bookmark their own trails. #}
+    {% if not trail.owner == user %}
+        <a id="bookmark_add" class="toggle_bookmark hidden" href="#"><span class="glyphicon glyphicon-bookmark"></span> Bookmark</a>
+        <a id="bookmark_remove" class="toggle_bookmark hidden"  href="#"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+    {% endif %}
 
     {% if user.is_superuser %}
         <p class="topmargin">

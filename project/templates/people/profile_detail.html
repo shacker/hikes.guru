@@ -45,6 +45,7 @@
 
     <div class="row">
         <div class="col-sm-12">
+            <h3>{{ person }}'s trails</h3>
             <div class="list-group">
                 {% for trail in trails  %}
                     {% include "trails/trail_list_looper.html" %}
@@ -52,6 +53,21 @@
             </div>
         </div>
     </div>
+
+    {% if user == person %}
+        {% if person.bookmarks.all.count > 0 %}
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Bookmarked trails</h3>
+                <div class="list-group">
+                    {% for trail in person.bookmarks.all  %}
+                        {% include "trails/trail_list_looper.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
 
     {% if user.is_superuser %}
         <a href="{% url 'login_as_other' person.username %}" class="btn btn-warning btn-small">Become {{ person }}</a>
