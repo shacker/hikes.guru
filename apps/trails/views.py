@@ -54,5 +54,24 @@ def toggle_featured(request):
             trail.featured = True
         trail.save()
 
-        # All views must return an httpresponse
+        return HttpResponse(status=204)
+
+
+@csrf_exempt
+def toggle_bookmark(request):
+    '''
+    User can toggle a trail's "bookmarked" status via ajax.
+    '''
+
+    if request.method == 'POST':
+        received_json_data = json.loads(request.body.decode('utf-8'))
+        urlhash = received_json_data.get('urlhash', None)
+        trail = Trail.objects.get(urlhash=urlhash)
+        bookmarks = request.user.bookmarks
+
+        if trail in bookmarks.all():
+            bookmarks.remove(trail)
+        else:
+            bookmarks.add(trail)
+
         return HttpResponse(status=204)

@@ -30,6 +30,10 @@
         <p class="list-group-item-text">Public: {{ trail.public }}</p>
     {% endif %}
 
+    {# Bookmark icon toggled on the fly with JS #}
+    <a id="bookmark_add" class="toggle_bookmark hidden" href="#"><span class="glyphicon glyphicon-bookmark"></span> Bookmark</a>
+    <a id="bookmark_remove" class="toggle_bookmark hidden"  href="#"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+
     {% if user.is_superuser %}
         <p class="topmargin">
             <a href="javascript:void(0);" id="toggle_featured" class="btn btn-success btn-sm">
@@ -40,6 +44,28 @@
 
 {% block extra_js %}
     <script>
+
+        // Toggle bookmark icon on page load
+        $( document ).ready(function() {
+            {% if trail in user.bookmarks.all %}
+                $('#bookmark_remove').toggleClass("hidden");
+            {% else %}
+                $('#bookmark_add').toggleClass("hidden");
+            {% endif %}
+        });
+
+        // Toggle bookmark on click
+        $('.toggle_bookmark').click(function(){
+            $.ajax({
+                url: "{% url 'toggle_bookmark' %}",
+                type: "POST",
+                data: JSON.stringify({ "urlhash": "{{ trail.urlhash }}" }),
+                success: function() {
+                    $( ".toggle_bookmark" ).toggleClass( "hidden" );
+                }
+            });
+        });
+
         // Toggle Featured button text
         $('#toggle_featured').click(function(){
             $.ajax({

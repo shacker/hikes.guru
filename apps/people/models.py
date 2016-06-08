@@ -48,6 +48,7 @@ class UserProfile(AbstractUser):
     distance_pref = models.CharField(max_length=2, choices=(DISTANCE_CHOICES), default="mi")
     hide_real_name = models.BooleanField(
         default=False, help_text='If checked, username will be shown in place of First/Last')
+    bookmarks = models.ManyToManyField('trails.Trail')
 
     @property
     def full_name(self):
