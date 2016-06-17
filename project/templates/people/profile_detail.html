@@ -19,6 +19,10 @@
                     {% if person == user %}
                         <p><a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit my profile</a></p>
                     {% endif %}
+
+                    {% if person.allow_contact %}
+                        <p><a href="{% url 'profile_contact' person.username %}" class="btn btn-primary">Contact {{ person }}</a></p>
+                    {% endif %}
                 </div>
                 <div class="col-sm-10">
                     {% if person.about %}

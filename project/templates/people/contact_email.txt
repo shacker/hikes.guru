@@ -1,0 +1,7 @@
+You've received a new message via hikes.guru from {{ sender }} ({{ sender.username }})
+
+{% autoescape off %}
+{{ body }}
+{% endautoescape %}
+
+Message sent on: {% now "jS F Y H:i" %}

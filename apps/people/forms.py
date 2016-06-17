@@ -35,4 +35,17 @@ class ProfileEditForm(forms.ModelForm):
         fields = [
             'first_name', 'last_name', 'distance_pref',
             'twitter', 'facebook', 'instagram',
-            'about', 'hide_real_name']
+            'about', 'hide_real_name', 'allow_contact']
+
+
+class ContactForm(forms.Form):
+    '''
+    Users can contact each other
+    '''
+
+    subject = forms.CharField(
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}))
+    body = forms.CharField(
+        required=True,
+        widget=forms.Textarea(attrs={'class': 'form-control'}))
