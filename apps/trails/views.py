@@ -63,7 +63,7 @@ def toggle_bookmark(request):
     User can toggle a trail's "bookmarked" status via ajax.
     '''
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated():
         received_json_data = json.loads(request.body.decode('utf-8'))
         urlhash = received_json_data.get('urlhash', None)
         trail = Trail.objects.get(urlhash=urlhash)
@@ -74,4 +74,4 @@ def toggle_bookmark(request):
         else:
             bookmarks.add(trail)
 
-        return HttpResponse(status=204)
+    return HttpResponse(status=204)
