@@ -6,3 +6,4 @@ psycopg2==2.6.1
 python-social-auth==0.2.19
 sorl-thumbnail==12.3
 pytz==2016.4
+django-bootstrap-form==3.2.1

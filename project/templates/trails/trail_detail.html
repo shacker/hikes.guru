@@ -8,6 +8,9 @@
 
     <p>Trail created by <a href="{% url 'profile_detail' trail.owner.username %}">{{ trail.owner }}</a></p>
 
+    <p>Description:</p>
+    {{ trail.description|safe }}
+
     {% if trail.distance %}
         <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
     {% endif %}
@@ -40,12 +43,16 @@
         Log in to bookmark this trail.
     {% endif %}
 
+    {% if trail.owner == user %}<a href="{% url 'trail_edit' trail.urlhash %}" class="btn btn-primary">Edit</a>{% endif %}
+
     {% if user.is_superuser %}
         <p class="topmargin">
             <a href="javascript:void(0);" id="toggle_featured" class="btn btn-success btn-sm">
                 {% if trail.featured %}Unfeature{% else %}Feature{% endif %}</a>
         </p>
     {% endif %}
+
+    Last modified: {{ trail.updated }}
 {% endblock content %}
 
 {% block extra_js %}
