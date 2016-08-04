@@ -27,6 +27,14 @@
         <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
     {% endif %}
 
+    <p class="list-group-item-text">Activity: {{ trail.get_activity_type_display }}</p>
+    <p class="list-group-item-text">Difficuly: {{ trail.get_difficulty_display }}</p>
+    <p class="list-group-item-text">Season: {{ trail.get_season_display }}</p>
+
+    {% if trail.directions %}
+        <p class="list-group-item-text">Driving/hike directions: {{ trail.directions }}</p>
+    {% endif %}
+
     <p class="list-group-item-text">Type: {{ trail.get_trail_type_display }}</p>
 
     {% if person == user or user.is_superuser %}

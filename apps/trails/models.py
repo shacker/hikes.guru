@@ -1,7 +1,8 @@
-from django.template.defaultfilters import slugify
 from django.db import models
-from people.models import UserProfile
+from django.template.defaultfilters import slugify
+
 from base.utils import id_generator
+from people.models import UserProfile
 
 
 def get_gpx_path(instance, filename):
@@ -19,6 +20,22 @@ TRAIL_TYPE_CHOICES = [
     ('ow', 'One Way'),
 ]
 
+ACTIVITY_TYPE_CHOICES = [
+    ('hike', 'Hike/Walk'),
+    ('bike', 'Bike'),
+]
+
+DIFFICULTY_CHOICES = [
+    ('easy', 'Easy'),
+    ('mod', 'Moderate'),
+    ('hard', 'Strenuous'),
+]
+
+SEASON_CHOICES = [
+    ('all', 'Year-Round'),
+    ('mild', 'Spring Through Fall'),
+]
+
 
 class Trail(models.Model):
     '''
@@ -28,7 +45,7 @@ class Trail(models.Model):
     urlhash = models.CharField(max_length=6, null=True, blank=True, unique=True)
     owner = models.ForeignKey(UserProfile)
     title = models.CharField(max_length=120)
-    region = models.CharField(max_length=120, help_text="e.g. Yosemite, CA")
+    region = models.CharField(max_length=120, help_text="e.g. 'Yosemite' or 'New York'")
     description = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
@@ -41,6 +58,10 @@ class Trail(models.Model):
     public = models.BooleanField(default=True, help_text="Visible to the world")
     featured = models.BooleanField(default=False, help_text="Editor picks")
     trail_type = models.CharField(max_length=6, choices=(TRAIL_TYPE_CHOICES), default="loop")
+    activity_type = models.CharField(max_length=6, choices=(ACTIVITY_TYPE_CHOICES), default="hike")
+    difficulty = models.CharField(max_length=6, choices=(DIFFICULTY_CHOICES), default="mod")
+    season = models.CharField(max_length=6, choices=(SEASON_CHOICES), default="all")
+    directions = models.TextField("Driving or Trail Directions", blank=True, null=True)
 
     def save(self, *args, **kwargs):
         # Make sure all trails get a urlhash, regardless how they're saved.

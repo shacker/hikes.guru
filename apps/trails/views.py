@@ -4,6 +4,7 @@ import json
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.postgres.search import SearchVector
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect
@@ -19,7 +20,13 @@ def trails_list(request):
     Main trails directory /finder
     """
 
-    trails = Trail.objects.all().order_by('-updated')
+    trails = Trail.objects.filter(public=True).order_by('-updated')
+
+    q = request.GET.get('q')
+    if q:
+        trails = trails.annotate(
+            search=SearchVector('title', 'description', 'region'),
+            ).filter(search=q)
 
     return render(request, 'trails/list.html', locals())
 

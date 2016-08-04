@@ -11,5 +11,5 @@ class TrailEditForm(forms.ModelForm):
         model = Trail
         fields = [
             'title', 'region', 'description', 'trackfile', 'distance', 'ascent', 'calories', 'duration', 'geocaches',
-            'public', 'trail_type'
+            'public', 'trail_type', 'activity_type', 'difficulty', 'season', 'directions'
             ]
