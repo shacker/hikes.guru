@@ -24,9 +24,7 @@ def trails_list(request):
 
     q = request.GET.get('q')
     if q:
-        trails = trails.annotate(
-            search=SearchVector('title', 'description', 'region'),
-            ).filter(search=q)
+        trails = trails.annotate(search=SearchVector('title', 'description', 'region')).filter(search=q)
 
     return render(request, 'trails/list.html', locals())
 
@@ -47,6 +45,10 @@ def trail_detail(request, urlhash):
     """
 
     trail = get_object_or_404(Trail, urlhash=urlhash)
+
+    if (not trail.public) and (not trail.owner == request.user):
+        return HttpResponseForbidden()
+
     return render(request, 'trails/trail_detail.html', locals())
 
 
