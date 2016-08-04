@@ -8,8 +8,10 @@
 
     <p>Trail created by <a href="{% url 'profile_detail' trail.owner.username %}">{{ trail.owner }}</a></p>
 
-    <p>Description:</p>
-    {{ trail.description|safe }}
+    {% if trail.description %}
+        <p>Description:</p>
+        {{ trail.description|safe }}
+    {% endif %}
 
     {% if trail.distance %}
         <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
