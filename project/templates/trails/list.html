@@ -16,5 +16,7 @@
 
     {% for trail in trails  %}
         {% include "trails/trail_list_looper.html" %}
+    {% empty %}
+        <p>No trails to show for search term "{{ q }}".</p>
     {% endfor %}
 {% endblock content %}
