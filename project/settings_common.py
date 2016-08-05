@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'social.apps.django_app.default',
     'bootstrapform',
+    # 'autofixture',
 
     # Our apps
     'base',

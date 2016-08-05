@@ -27,4 +27,4 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     '''
     Generate random 6-char IDs for use in URLs.
     '''
-    return ''.join(random.choice(chars) for _ in range(size))
+    return ''.join(random.choice(chars).upper() for _ in range(size))

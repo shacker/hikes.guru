@@ -42,7 +42,7 @@ class Trail(models.Model):
     Base trips and trails model.
     '''
 
-    urlhash = models.CharField(max_length=6, null=True, blank=True, unique=True)
+    urlhash = models.CharField(max_length=6, null=True, blank=True, unique=True, default=None)
     owner = models.ForeignKey(UserProfile)
     title = models.CharField(max_length=120)
     region = models.CharField(max_length=120, help_text="e.g. 'Yosemite' or 'New York'")
@@ -50,9 +50,9 @@ class Trail(models.Model):
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     trackfile = models.FileField(upload_to=get_gpx_path, blank=True, null=True)
-    distance = models.IntegerField(blank=True, null=True, help_text="Stored as meters")
+    distance = models.PositiveIntegerField(blank=True, null=True, help_text="Stored as meters")
     ascent = models.IntegerField(blank=True, null=True, help_text="Stored as meters")
-    calories = models.SmallIntegerField(blank=True, null=True)
+    calories = models.PositiveSmallIntegerField(blank=True, null=True)
     duration = models.DurationField(blank=True, null=True)
     geocaches = models.BooleanField(default=False, help_text="Geocaches available on this trail")
     public = models.BooleanField(default=True, help_text="Visible to the world")
