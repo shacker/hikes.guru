@@ -7,3 +7,7 @@ python-social-auth==0.2.19
 sorl-thumbnail==12.3
 pytz==2016.4
 django-bootstrap-form==3.2.1
+
+
+# dev only:
+# django-autofixture

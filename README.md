@@ -34,6 +34,7 @@ Customizations go in `static/styles/sass/app.scss` and in the `partials` folder 
 Add -w in another terminal to "watch" the directory (real-time recompilation).
 
 
-Generate test data:
+Generate test data with randomized titles, regions, descriptions and directions:
 Enable `autofixture` in `INSTALLED_APPS`, then:
 `./manage.py loadtestdata trails.Trail:1000`
+`./manage.py random_titles`
