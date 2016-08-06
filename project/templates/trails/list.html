@@ -19,4 +19,20 @@
     {% empty %}
         <p>No trails to show for search term "{{ q }}".</p>
     {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if trails.has_previous %}
+                <a href="?page={{ trails.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ trails.number }} of {{ trails.paginator.num_pages }}.
+            </span>
+
+            {% if trails.has_next %}
+                <a href="?page={{ trails.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock content %}

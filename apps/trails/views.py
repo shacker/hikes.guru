@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.postgres.search import SearchVector
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect
@@ -19,13 +20,22 @@ def trails_list(request):
     """
     Main trails directory /finder
     """
-
+    page = request.GET.get('page', 1)
     trails = Trail.objects.filter(public=True).order_by('-updated')
 
     q = request.GET.get('q')
     if q:
         trails = trails.annotate(search=SearchVector('title', 'description', 'region')).filter(search=q)
 
+    paginator = Paginator(trails, 25)  # Number of trails per page
+    try:
+        trails = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        trails = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        trails = paginator.page(paginator.num_pages)
     return render(request, 'trails/list.html', locals())
 
 
