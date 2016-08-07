@@ -6,7 +6,7 @@ from django.contrib.auth.views import logout
 from django.views.generic.base import RedirectView
 
 from base.views import login_as_other
-from base.views import home
+from base.views import home, faqs
 from feedback.views import feedback
 
 urlpatterns = [
@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^trails/', include('trails.urls')),
     url(r'^login_as_other/(?P<username>[\w.-]+)$', login_as_other, name='login_as_other'),
     url(r'^admin/', admin.site.urls),
+    url(r'^faqs/$', faqs, name="faqs"),
     url(r'^$', home, name="home"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Uploaded media in DEBUG mode

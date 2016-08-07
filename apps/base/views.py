@@ -4,16 +4,15 @@ from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
 from django.contrib import messages
 
-
 from people.models import UserProfile
 
 
 def home(request):
-    return render(
-        request,
-        'home.html',
-        locals(),
-    )
+    return render(request, 'home.html', locals())
+
+
+def faqs(request):
+    return render(request, 'faqs.html', locals())
 
 
 # Superusers only
