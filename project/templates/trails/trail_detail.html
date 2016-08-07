@@ -8,6 +8,9 @@
 
     <p>Trail created by <a href="{% url 'profile_detail' trail.owner.username %}">{{ trail.owner }}</a></p>
 
+    <p class="list-group-item-text">Country: {{ trail.get_country_display }}</p>
+    <p class="list-group-item-text">Region: {{ trail.region }}</p>
+
     {% if trail.description %}
         <p>Description:</p>
         {{ trail.description|safe }}

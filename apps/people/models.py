@@ -5,6 +5,8 @@ from django.template.defaultfilters import slugify
 
 from sorl.thumbnail import ImageField
 
+from base.choices import COUNTRIES_CHOICES
+
 
 def get_avatar_path(instance, filename):
     """
@@ -35,6 +37,8 @@ class UserProfile(AbstractUser):
 
     about = models.TextField(
         help_text='Describe yourself: Interests, Bio, etc. Limited to 500 words.', null=True, blank=True)
+    country = models.CharField(max_length=2, choices=(COUNTRIES_CHOICES), default="US")
+    region = models.CharField(max_length=120, help_text="e.g. 'Yosemite' or 'New York'")
     twitter = models.CharField(
         max_length=60, help_text='Your Twitter username',
         null=True, blank=True, validators=[validate_username, ])

@@ -42,6 +42,14 @@
                     {% if person.instagram %}
                         <a href="https://instagram.com/{{ person.instagram }}"><img src="{% static 'img/social/instagram-128.png' %}" width="30"/></a>
                     {% endif %}
+
+                    {% if person.country %}
+                        {{ person.get_country_display}}
+                    {% endif %}
+
+                    {% if person.region %}
+                        {{ person.region}}
+                    {% endif %}
                 </div>
             </div>
         </div>

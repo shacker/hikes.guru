@@ -34,6 +34,7 @@ class ProfileEditForm(forms.ModelForm):
         model = UserProfile
         fields = [
             'first_name', 'last_name', 'distance_pref',
+            'country', 'region',
             'twitter', 'facebook', 'instagram',
             'about', 'hide_real_name', 'allow_contact']
 

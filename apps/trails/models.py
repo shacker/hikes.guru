@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 from base.utils import id_generator
+from base.choices import COUNTRIES_CHOICES
 from people.models import UserProfile
 
 
@@ -45,6 +46,7 @@ class Trail(models.Model):
     urlhash = models.CharField(max_length=6, null=True, blank=True, unique=True, default=None)
     owner = models.ForeignKey(UserProfile)
     title = models.CharField(max_length=120)
+    country = models.CharField(max_length=2, choices=(COUNTRIES_CHOICES), default="US")
     region = models.CharField(max_length=120, help_text="e.g. 'Yosemite' or 'New York'")
     description = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
