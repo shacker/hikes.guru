@@ -58,6 +58,8 @@
     <div class="row">
         <div class="col-sm-12">
             <h3>{{ person }}'s trails</h3>
+            <h5>{{ paginator.count }} trails</h5>
+
             <div class="list-group">
                 {% for trail in trails  %}
                     {% include "trails/trail_list_looper.html" %}
