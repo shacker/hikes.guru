@@ -64,27 +64,29 @@ def trail_detail(request, urlhash):
     return render(request, 'trails/trail_detail.html', locals())
 
 
-def trail_edit(request, urlhash):
+def trail_edit(request, urlhash=None):
     """
-    Single trail edit view
+    If urlhash present, edit trail; else create new.
     """
 
-    trail = get_object_or_404(Trail, urlhash=urlhash)
-
-    if not trail.owner == request.user:
-        return HttpResponseForbidden()
+    if urlhash:
+        trail = get_object_or_404(Trail, urlhash=urlhash)
+        if not trail.owner == request.user:
+            return HttpResponseForbidden()
+    else:
+        trail = Trail(owner=request.user)
 
     if request.method == "POST":
 
         form = TrailEditForm(request.POST, instance=trail)
         if form.is_valid():
-            updated = form.save(commit=False)
-            updated.body = bleach.clean(form.cleaned_data['description'], strip=True, tags=settings.ALLOWED_TAGS)
-            updated.updated = timezone.now()
-            updated.save()
+            trailobj = form.save(commit=False)
+            trailobj.body = bleach.clean(form.cleaned_data['description'], strip=True, tags=settings.ALLOWED_TAGS)
+            trailobj.updated = timezone.now()
+            trailobj.save()
 
             messages.success(request, "Your trail has been edited.")
-            return redirect(reverse('trail_detail', kwargs={'urlhash': urlhash}))
+            return redirect(reverse('trail_detail', kwargs={'urlhash': trailobj.urlhash}))
         else:
             messages.error(request, "There were errors in the form.")
 

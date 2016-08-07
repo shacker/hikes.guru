@@ -29,7 +29,7 @@ def profile_detail(request, username):
     """
 
     person = get_object_or_404(UserProfile, username=username)
-    trails = person.trail_set.all()
+    trails = person.trail_set.all().order_by('-updated')
 
     # Hide private trails from non-superusers
     if not person == request.user and not request.user.is_superuser:

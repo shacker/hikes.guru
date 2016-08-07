@@ -49,7 +49,7 @@
                         <a href="{% url 'trails_list' %}">Trails</a>
                     </li>
                     <li>
-                        <a href="#">New</a>
+                        <a href="{% url 'trail_new' %}">New</a>
                     </li>
                     <li>
                         {% if user.is_authenticated %}

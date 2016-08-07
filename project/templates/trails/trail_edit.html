@@ -5,7 +5,8 @@
 {% block title %}{{ trail.title }} by {{ trail.owner }} (Trail) {{ block.super }}{% endblock title %}
 
 {% block content %}
-    <h2>Edit Trail</h2>
+
+    <h2>{% if urlhash %}Edit{% else %}Add a{% endif %} Trail</h2>
 
 
     <form class="" action="" method="post">
