@@ -20,13 +20,14 @@ def trails_list(request):
     """
     Main trails directory /finder
     """
-    page = request.GET.get('page', 1)
+
     trails = Trail.objects.filter(public=True).order_by('-updated')
 
     q = request.GET.get('q')
     if q:
         trails = trails.annotate(search=SearchVector('title', 'description', 'region')).filter(search=q)
 
+    page = request.GET.get('page', 1)
     paginator = Paginator(trails, 25)  # Number of trails per page
     try:
         trails = paginator.page(page)
@@ -36,6 +37,7 @@ def trails_list(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         trails = paginator.page(paginator.num_pages)
+
     return render(request, 'trails/list.html', locals())
 
 

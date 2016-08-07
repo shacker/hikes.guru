@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
@@ -28,12 +29,22 @@ def profile_detail(request, username):
     """
 
     person = get_object_or_404(UserProfile, username=username)
-
     trails = person.trail_set.all()
 
     # Hide private trails from non-superusers
     if not person == request.user and not request.user.is_superuser:
         trails = trails.exclude(public=True)
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(trails, 25)  # Number of trails per page
+    try:
+        trails = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        trails = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        trails = paginator.page(paginator.num_pages)
 
     return render(request, 'people/profile_detail.html', locals())
 
