@@ -8,12 +8,13 @@
 
     <h2>{% if urlhash %}Edit{% else %}Add a{% endif %} Trail</h2>
 
-
     <form class="" action="" method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
         <p><input type="submit" class="btn btn-primary" name="trail_edit_form" value="Submit"></p>
     </form>
+
+    <p><a href="{% url 'trail_delete' trail.urlhash %}" class="btn btn-sm btn-danger">Delete this trail</a></p>
 
 {% endblock content %}
 

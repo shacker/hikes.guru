@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^toggle_bookmark/$', views.toggle_bookmark, name='toggle_bookmark'),
     url(r'^$', views.alltrails, name='alltrails'),
     url(r'^(?P<urlhash>[\w.-]+)/edit/$', views.trail_edit, name='trail_edit'),
+    url(r'^(?P<urlhash>[\w.-]+)/delete/$', views.trail_delete, name='trail_delete'),
     url(r'^new/$', views.trail_edit, name='trail_new'),
     url(r'^(?P<urlhash>[\w.-]+)/$', views.trail_detail, name='trail_detail'),
 ]

@@ -14,3 +14,13 @@ class TrailEditForm(forms.ModelForm):
             'calories', 'duration', 'geocaches', 'public', 'trail_type', 'activity_type',
             'difficulty', 'season', 'directions',
             ]
+
+
+class TrailDeleteForm(forms.Form):
+    '''
+    User deletes own trail.
+    '''
+
+    confirm = forms.CharField(
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}))

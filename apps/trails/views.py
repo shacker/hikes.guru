@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
 from trails.models import Trail
-from trails.forms import TrailEditForm
+from trails.forms import TrailEditForm, TrailDeleteForm
 from trails.utils import trails_list
 
 
@@ -81,6 +81,31 @@ def trail_edit(request, urlhash=None):
         form = TrailEditForm(instance=trail)
 
     return render(request, 'trails/trail_edit.html', locals())
+
+
+def trail_delete(request, urlhash=None):
+    """
+    Let user delete their own trails.
+    """
+
+    trail = get_object_or_404(Trail, urlhash=urlhash)
+    if not trail.owner == request.user:
+            return HttpResponseForbidden()
+
+    if request.method == "POST":
+
+        form = TrailDeleteForm(request.POST)
+        if form.is_valid():
+            trail.delete()
+            messages.success(request, "Your trail has been deleted.")
+            return redirect(reverse('alltrails'))
+        else:
+            messages.error(request, "There were errors in the form.")
+
+    else:
+        form = TrailDeleteForm()
+
+    return render(request, 'trails/trail_delete.html', locals())
 
 
 @user_passes_test(lambda u: u.is_superuser)
