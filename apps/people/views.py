@@ -12,6 +12,7 @@ from django.utils import timezone
 
 from people.forms import ProfileEditForm, ContactForm
 from people.models import UserProfile
+from trails.utils import trails_list
 
 
 def directory(request):
@@ -29,22 +30,13 @@ def profile_detail(request, username):
     """
 
     person = get_object_or_404(UserProfile, username=username)
-    trails = person.trail_set.all().order_by('-updated')
+    trails_qs = person.trail_set.all().order_by('-updated')
 
     # Hide private trails from non-superusers
     if not person == request.user and not request.user.is_superuser:
-        trails = trails.exclude(public=True)
+        trails = trails_qs.exclude(public=True)
 
-    page = request.GET.get('page', 1)
-    paginator = Paginator(trails, 25)  # Number of trails per page
-    try:
-        trails = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        trails = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        trails = paginator.page(paginator.num_pages)
+    paginator, trails = trails_list(request, trails_qs)  # paginated result
 
     return render(request, 'people/profile_detail.html', locals())
 

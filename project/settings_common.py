@@ -90,6 +90,8 @@ TEMPLATES = [
     },
 ]
 
+NUM_TRAILS_PER_PAGE = 25
+
 # HTML tags users are allowed to use in forms - all others are bleached out
 ALLOWED_TAGS = [
     'a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i',
