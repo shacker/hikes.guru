@@ -22,6 +22,7 @@ def alltrails(request):
 
     trails_qs = Trail.objects.filter(public=True).order_by('-updated')
     paginator, trails = trails_list(request, trails_qs)  # paginated result
+    q = request.GET.get('q')
 
     return render(request, 'trails/list.html', locals())
 

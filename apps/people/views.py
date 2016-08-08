@@ -37,6 +37,7 @@ def profile_detail(request, username):
         trails = trails_qs.exclude(public=True)
 
     paginator, trails = trails_list(request, trails_qs)  # paginated result
+    q = request.GET.get('q')
 
     return render(request, 'people/profile_detail.html', locals())
 

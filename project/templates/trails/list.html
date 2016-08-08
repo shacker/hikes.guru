@@ -5,14 +5,7 @@
 {% block content %}
     <h2>All Trails</h2>
 
-    <form class="form" action="" method="get" style="margin-bottom: 10px;">
-        <div class="input-group">
-            <input type="text" class="form-control" name="q" placeholder="Search for..." value="{% if q %}{{ q }}{% endif %}">
-            <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Go!</button>
-            </span>
-        </div>
-    </form>
+    {% include "trails/include/search_form.html" %}
 
     <h5>{{ paginator.count }} trails</h5>
 
