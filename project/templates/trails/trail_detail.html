@@ -37,7 +37,7 @@
     <p class="list-group-item-text">Season: {{ trail.get_season_display }}</p>
 
     {% if trail.directions %}
-        <p class="list-group-item-text">Driving/hike directions: {{ trail.directions }}</p>
+        <p class="list-group-item-text">Driving/hike directions: {{ trail.directions|safe }}</p>
     {% endif %}
 
     <p class="list-group-item-text">Type: {{ trail.get_trail_type_display }}</p>

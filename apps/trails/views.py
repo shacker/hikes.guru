@@ -82,6 +82,7 @@ def trail_edit(request, urlhash=None):
         if form.is_valid():
             trailobj = form.save(commit=False)
             trailobj.body = bleach.clean(form.cleaned_data['description'], strip=True, tags=settings.ALLOWED_TAGS)
+            trailobj.directions = bleach.clean(form.cleaned_data['directions'], strip=True, tags=settings.ALLOWED_TAGS)
             trailobj.updated = timezone.now()
             trailobj.save()
 

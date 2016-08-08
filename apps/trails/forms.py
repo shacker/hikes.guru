@@ -10,6 +10,7 @@ class TrailEditForm(forms.ModelForm):
     class Meta:
         model = Trail
         fields = [
-            'title', 'region', 'country', 'description', 'trackfile', 'distance', 'ascent', 'calories', 'duration', 'geocaches',
-            'public', 'trail_type', 'activity_type', 'difficulty', 'season', 'directions'
+            'title', 'region', 'country', 'description', 'trackfile', 'distance', 'ascent',
+            'calories', 'duration', 'geocaches', 'public', 'trail_type', 'activity_type',
+            'difficulty', 'season', 'directions',
             ]
