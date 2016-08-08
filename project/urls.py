@@ -8,6 +8,7 @@ from django.views.generic.base import RedirectView
 from base.views import login_as_other
 from base.views import home, faqs
 from feedback.views import feedback
+from people import views as people_views
 
 urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)),
@@ -17,6 +18,8 @@ urlpatterns = [
     url(r'^feedback/$', feedback, name='feedback'),
     url(r'^people/', include('people.urls')),
     url(r'^trails/', include('trails.urls')),
+    url(r'^bookmarks/$', people_views.bookmarks, name='bookmarks'),
+
     url(r'^login_as_other/(?P<username>[\w.-]+)$', login_as_other, name='login_as_other'),
     url(r'^admin/', admin.site.urls),
     url(r'^faqs/$', faqs, name="faqs"),

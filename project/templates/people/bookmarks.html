@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% load trailtags %}
+
+{% block title %}{{ person }} {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <h2>Trails I've Bookmarked</h2>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            {% include "trails/include/search_form.html" %}
+
+            <div class="list-group">
+                {% for trail in trails  %}
+                    {% include "trails/trail_list_looper.html" %}
+                {% endfor %}
+            </div>
+
+            {% include "trails/include/prevnext.html" %}
+        </div>
+    </div>
+
+{% endblock content %}

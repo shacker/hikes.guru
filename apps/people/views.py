@@ -24,6 +24,19 @@ def directory(request):
     return render(request, 'people/directory.html', locals())
 
 
+@login_required
+def bookmarks(request):
+    """
+    View my bookmarked trails
+    """
+
+    trails_qs = request.user.bookmarks.all().order_by('-updated')
+    paginator, trails = trails_list(request, trails_qs)  # paginated result
+    q = request.GET.get('q')
+
+    return render(request, 'people/bookmarks.html', locals())
+
+
 def profile_detail(request, username):
     """
     Display an individual profile
@@ -54,10 +67,10 @@ def profile_edit(request):
         form = ProfileEditForm(request.POST, instance=profile)
 
         if form.is_valid():
-            new_data = form.save(commit=False)
+            profile_obj = form.save(commit=False)
             about = bleach.clean(form.cleaned_data['about'], strip=True, tags=settings.ALLOWED_TAGS)
-            new_data.about = about
-            new_data.save()
+            profile_obj.about = about
+            profile_obj.save()
 
             messages.success(request, "Profile edited successfully.")
             return redirect(reverse('profile_detail', kwargs={'username': request.user.username}))

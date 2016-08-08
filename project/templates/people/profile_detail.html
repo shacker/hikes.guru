@@ -18,6 +18,7 @@
 
                     {% if person == user %}
                         <p><a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit my profile</a></p>
+                        <p><a href="{% url 'bookmarks' %}" class="btn btn-success">My bookmarked trails</a></p>
                     {% endif %}
 
                     {% if person.allow_contact %}
@@ -60,8 +61,6 @@
             <h3>{{ person }}'s trails</h3>
             <h5>{{ paginator.count }} trails</h5>
 
-            <p><a href="{% url 'trail_new' %}" class="btn btn-success">Add a new trail</a></p>
-
             {% include "trails/include/search_form.html" %}
 
             <div class="list-group">
@@ -74,23 +73,10 @@
         </div>
     </div>
 
-    {% if user == person %}
-        {% if person.bookmarks.all.count > 0 %}
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>Bookmarked trails</h3>
-                <div class="list-group">
-                    {% for trail in person.bookmarks.all  %}
-                        {% include "trails/trail_list_looper.html" %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-    {% endif %}
-
     {% if user.is_superuser %}
-        <a href="{% url 'login_as_other' person.username %}" class="btn btn-warning btn-small">Become {{ person }}</a>
+        <div class="topmargin">
+            <a href="{% url 'login_as_other' person.username %}" class="btn btn-warning btn-small">Become {{ person }}</a>
+        </div>
     {% endif %}
 
 {% endblock content %}
