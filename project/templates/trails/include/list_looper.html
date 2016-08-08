@@ -1,0 +1,60 @@
+{% load trailtags %}
+
+<form class="form" action="" method="get" style="margin-bottom: 10px;">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="Search for..." value="{% if q %}{{ q }}{% endif %}">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">Go!</button>
+        </span>
+    </div>
+</form>
+
+<h5>{{ paginator.count }} trails</h5>
+
+{% for trail in trails  %}
+
+    <span class="list-group-item">
+        <h4 class="list-group-item-heading"><a href="{% url 'trail_detail' trail.urlhash %}">{{ trail.title }} ({{ trail.region }})</a></h4>
+        <p class="list-group-item-text">Owner: {{ trail.owner }}</p>
+
+        {% if trail.distance %}
+            <p class="list-group-item-text">Distance: {% meters_to_distance trail.distance user.distance_pref "long" %}</p>
+        {% endif %}
+        {% if trail.ascent %}
+            <p class="list-group-item-text">Ascent: {% meters_to_distance trail.ascent user.distance_pref "short" %}</p>
+        {% endif %}
+        {% if trail.calories %}
+            <p class="list-group-item-text">Calories: {{ trail.calories }}</p>
+        {% endif %}
+        {% if trail.duration %}
+            <p class="list-group-item-text">Duration: {{ trail.duration }}</p>
+        {% endif %}
+        <p class="list-group-item-text">Type: {{ trail.get_trail_type_display }}</p>
+        {% if person == user or user.is_superuser %}
+            <p class="list-group-item-text">Public: {{ trail.public }}</p>
+        {% endif %}
+        <p class="list-group-item-text">Updated: {{ trail.updated }}</p>
+    </span>
+
+{% empty %}
+    <p>No trails to show for search term "{{ q }}".</p>
+{% endfor %}
+
+
+{% if paginator.num_pages > 1 %}
+    <div class="btn-group topmargin">
+        {% if trails.has_previous %}
+            <button type="button" class="btn btn-default">
+                <a href="?page={{ trails.previous_page_number }}">&laquo; Previous</a>
+            </button>
+        {% endif %}
+
+        <button type="button" class="btn btn-default">Page {{ trails.number }} of {{ trails.paginator.num_pages }}</button>
+
+        {% if trails.has_next %}
+            <button type="button" class="btn btn-default">
+                <a href="?page={{ trails.next_page_number }}">Next &raquo;</a>
+          </button>
+        {% endif %}
+    </div>
+{% endif %}

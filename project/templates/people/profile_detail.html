@@ -59,17 +59,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h3>{{ person }}'s trails</h3>
-            <h5>{{ paginator.count }} trails</h5>
-
-            {% include "trails/include/search_form.html" %}
-
-            <div class="list-group">
-                {% for trail in trails  %}
-                    {% include "trails/trail_list_looper.html" %}
-                {% endfor %}
-            </div>
-
-            {% include "trails/include/prevnext.html" %}
+            {% include "trails/include/list_looper.html" %}
         </div>
     </div>
 
