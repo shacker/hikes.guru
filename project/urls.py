@@ -13,7 +13,8 @@ from people import views as people_views
 urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)),
 
-    url('', include('social.apps.django_app.urls', namespace='social')),  # social_auth
+    url(r'^accounts/', include('allauth.urls')),
+
     url(r'^logout/$', logout, {'next_page': '/'}, name="logout"),
     url(r'^feedback/$', feedback, name='feedback'),
     url(r'^people/', include('people.urls')),

@@ -3,7 +3,7 @@ import json
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect
@@ -50,6 +50,7 @@ def trail_detail(request, urlhash):
     return render(request, 'trails/trail_detail.html', locals())
 
 
+@login_required
 def trail_edit(request, urlhash=None):
     """
     If urlhash present, edit trail; else create new.
