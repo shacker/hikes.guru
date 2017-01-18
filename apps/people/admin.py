@@ -7,5 +7,6 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('username', 'first_name', 'last_name',)
     search_fields = ('username', 'first_name', 'last_name')
     ordering = ('username',)
+    exclude = ['bookmarks', 'password', ]
 
 admin.site.register(UserProfile, UserProfileAdmin)
